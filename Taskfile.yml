@@ -1,0 +1,24 @@
+# https://taskfile.dev
+version: "3"
+
+silent: true
+
+vars:
+  COMPOSE_NAME: ""
+
+tasks:
+  up:
+    desc: Start the containers defined in the given compose file
+    cmd: docker-compose -f ./compose/{{.COMPOSE_NAME}}.yml up -d
+
+  down:
+    desc: Stop the containers defined in the given compose file
+    cmd: docker-compose -f ./compose/{{.COMPOSE_NAME}}.yml down
+
+  delete:
+    desc: "WARNING: Stop and delete the containers defined in the given compose file"
+    cmd: docker-compose -f ./compose/{{.COMPOSE_NAME}}.yml down -v
+
+  debug:
+    desc: Print the compose file name
+    cmd: echo "Compose file name is {{.COMPOSE_NAME}}"
