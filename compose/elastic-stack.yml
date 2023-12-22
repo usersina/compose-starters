@@ -3,7 +3,7 @@ version: "3"
 services:
   elasticsearch:
     image: elasticsearch:8.10.4
-    container_name: elasticsearch
+    container_name: starter-elasticsearch
     environment:
       - xpack.security.enabled=false
       - discovery.type=single-node
@@ -17,7 +17,7 @@ services:
 
   kibana:
     image: kibana:8.10.4
-    container_name: kibana
+    container_name: starter-kibana
     depends_on:
       - elasticsearch
     environment:

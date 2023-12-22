@@ -3,6 +3,7 @@ version: "3"
 services:
   mariadb:
     image: mariadb:10
+    container_name: starter-mariadb
     environment:
       - MARIADB_ROOT_PASSWORD=root
     volumes:
@@ -20,6 +21,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin:5.2.1
+    container_name: starter-phpmyadmin
     depends_on:
       - mariadb
     environment:
