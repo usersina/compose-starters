@@ -24,9 +24,13 @@ services:
     container_name: starter-phpmyadmin
     depends_on:
       - mariadb
+    volumes:
+      - ./init/mariadb/upload:/var/www/html/upload
     environment:
       - PMA_ARBITRARY=1
       - PMA_PMADB=phpmyadmin
+      - UPLOAD_LIMIT=100000000
+      - PMA_UPLOADDIR=/var/www/html/upload
     networks:
       - mariadb-net
     ports:
