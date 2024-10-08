@@ -42,8 +42,5 @@ volumes:
 
 networks:
   mariadb-net:
-    driver: bridge
-  shared-net:
-    # In case database is to be used in other compose stacks
-    name: sample-starter-mariadb
+    name: starter-mariadb-net
     driver: bridge

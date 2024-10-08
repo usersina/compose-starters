@@ -33,5 +33,5 @@ volumes:
 
 networks:
   elastic-net:
-    name: sample-starter-elasticsearch
+    name: starter-elasticsearch
     driver: bridge
