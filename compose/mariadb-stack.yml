@@ -11,7 +11,6 @@ services:
       - ./init/mariadb:/docker-entrypoint-initdb.d
     networks:
       - mariadb-net
-      - shared-net
     ports:
       - 3306:3306
     healthcheck:
