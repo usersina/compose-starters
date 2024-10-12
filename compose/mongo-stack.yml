@@ -1,0 +1,22 @@
+services:
+  mongo:
+    image: mongo:8.0
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo-vol:/data/db
+    networks:
+      - mongo-net
+    ports:
+      - 27017:27017
+
+volumes:
+  mongo-vol:
+    driver: local
+
+networks:
+  mongo-net:
+    name: starter-mongo-net
+    driver: bridge
