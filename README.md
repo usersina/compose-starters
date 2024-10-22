@@ -28,7 +28,7 @@ where the `COMPOSE_NAME` is the name of the file without the leading path and th
 If you have [Taskfile](https://taskfile.dev/) installed
 
 ```bash
-task up COMPOSE_NAME=elastic-stack
+task up COMPOSE_NAME=elastic
 ```
 
 or alternatively if `task` is not installed.
@@ -36,3 +36,10 @@ or alternatively if `task` is not installed.
 ```bash
 docker-compose -f ./compose/elastic-stack.yml up -d
 ```
+
+## Supported Stack Names
+
+- [`elastic`](./compose/elastic-stack.yml)
+- [`mariadb`](./compose/mariadb-stack.yml)
+- [`mongo`](./compose/mongo-stack.yml)
+- [`postgres`](./compose/postgres-stack.yml)

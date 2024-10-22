@@ -33,7 +33,7 @@ services:
     networks:
       - mariadb-net
     ports:
-      - 8080:80
+      - 8180:80
 
 volumes:
   mariadb-vol:

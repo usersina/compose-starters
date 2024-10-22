@@ -11,19 +11,19 @@ tasks:
     requires:
       vars: ["COMPOSE_NAME"]
     desc: Start the containers defined in the given compose file
-    cmd: ./docker-compose-wrapper.sh -f ./compose/{{.COMPOSE_NAME}}.yml up -d
+    cmd: ./docker-compose-wrapper.sh -f ./compose/{{.COMPOSE_NAME}}-stack.yml up -d
 
   down:
     requires:
       vars: ["COMPOSE_NAME"]
     desc: Stop the containers defined in the given compose file
-    cmd: ./docker-compose-wrapper.sh -f ./compose/{{.COMPOSE_NAME}}.yml down
+    cmd: ./docker-compose-wrapper.sh -f ./compose/{{.COMPOSE_NAME}}-stack.yml down
 
   delete:
     requires:
       vars: ["COMPOSE_NAME"]
     desc: "WARNING: Stop and delete the containers defined in the given compose file"
-    cmd: ./docker-compose-wrapper.sh -f ./compose/{{.COMPOSE_NAME}}.yml down -v
+    cmd: ./docker-compose-wrapper.sh -f ./compose/{{.COMPOSE_NAME}}-stack.yml down -v
 
   debug:
     desc: Print the compose file name
