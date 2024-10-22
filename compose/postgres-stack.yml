@@ -1,0 +1,46 @@
+name: postgres-stack
+
+services:
+  postgres:
+    image: postgres:17-bullseye
+    container_name: starter-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - postgres-vol:/var/lib/postgresql/data
+    networks:
+      - postgres-net
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: starter-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: postgres@local.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    volumes:
+      - pgadmin-vol:/var/lib/pgadmin
+    networks:
+      - postgres-net
+    ports:
+      - "8280:80"
+
+volumes:
+  postgres-vol:
+    driver: local
+
+  pgadmin-vol:
+    driver: local
+
+networks:
+  postgres-net:
+    name: starter-postgres-net
+    driver: bridge
