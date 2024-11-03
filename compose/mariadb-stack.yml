@@ -2,7 +2,7 @@ name: mariadb-stack
 
 services:
   mariadb:
-    image: mariadb:10
+    image: mariadb:11.4
     container_name: starter-mariadb
     environment:
       - MARIADB_ROOT_PASSWORD=root
@@ -14,9 +14,12 @@ services:
     ports:
       - 3306:3306
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 20s
-      retries: 10
+        test: [ "CMD", "healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized" ]
+        start_period: 1m
+        start_interval: 10s
+        interval: 1m
+        timeout: 5s
+        retries: 3
 
   phpmyadmin:
     image: phpmyadmin:5.2.1
