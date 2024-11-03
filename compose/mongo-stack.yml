@@ -4,6 +4,7 @@ services:
   mongo:
     image: mongo:8.0
     restart: unless-stopped
+    container_name: starter-mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example

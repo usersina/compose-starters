@@ -22,13 +22,13 @@ tasks:
   down:
     requires:
       vars: ["COMPOSE_NAME"]
-    desc: Stop the containers defined in the given compose file
+    desc: Delete the containers defined in the given compose file
     cmd: ./docker-compose-wrapper.sh -f ./compose/{{.COMPOSE_NAME}}-stack.yml down
 
   delete:
     requires:
       vars: ["COMPOSE_NAME"]
-    desc: "WARNING: Stop and delete the containers defined in the given compose file"
+    desc: "WARNING: Delete the containers AND THE VOLUMES defined in the given compose file"
     cmd: ./docker-compose-wrapper.sh -f ./compose/{{.COMPOSE_NAME}}-stack.yml down -v
 
   debug:
