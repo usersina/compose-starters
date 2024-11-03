@@ -13,6 +13,12 @@ tasks:
     desc: Start the containers defined in the given compose file
     cmd: ./docker-compose-wrapper.sh -f ./compose/{{.COMPOSE_NAME}}-stack.yml up -d
 
+  stop:
+    requires:
+      vars: ["COMPOSE_NAME"]
+    desc: Stop the containers defined in the given compose file
+    cmd: ./docker-compose-wrapper.sh -f ./compose/{{.COMPOSE_NAME}}-stack.yml stop
+
   down:
     requires:
       vars: ["COMPOSE_NAME"]
