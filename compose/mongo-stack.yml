@@ -4,16 +4,36 @@ services:
   mongo:
     image: mongo:8.0
     restart: unless-stopped
+    command: ["--replSet", "rs0", "--keyFile", "/etc/mongo-keyfile"]
     container_name: starter-mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
       - mongo-vol:/data/db
+      - ./init/mongo/mongo-keyfile:/etc/mongo-keyfile:ro
     networks:
       - mongo-net
     ports:
       - 27017:27017
+    healthcheck:
+      test: mongosh --host localhost:27017 --eval 'db.adminCommand("ping")' || exit 1
+      interval: 5s
+      timeout: 30s
+      start_period: 0s
+      start_interval: 1s
+      retries: 30
+
+  mongo-init-replica:
+    image: mongo:8.0
+    container_name: mongo-init-replica
+    depends_on:
+      - mongo
+    volumes:
+      - ./init/mongo/init-replica.sh:/docker-entrypoint-initdb.d/init-replica.sh:ro
+    entrypoint: ["/docker-entrypoint-initdb.d/init-replica.sh"]
+    networks:
+      - mongo-net
 
 volumes:
   mongo-vol:
